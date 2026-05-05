@@ -1,0 +1,19 @@
+{
+  "model_type": "LogisticRegression",
+  "C": 10.0,
+  "solver": "lbfgs",
+  "tfidf_features": 39412,
+  "tfidf_ngram": [
+    1,
+    2
+  ],
+  "label_classes": [
+    "negative",
+    "neutral",
+    "positive"
+  ],
+  "val_accuracy": 0.8952,
+  "val_f1_weighted": 0.8956,
+  "train_size": 11000,
+  "valid_size": 1260
+}
