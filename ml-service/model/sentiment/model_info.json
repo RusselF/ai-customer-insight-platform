@@ -1,19 +1,40 @@
 {
-  "model_type": "LogisticRegression",
-  "C": 10.0,
-  "solver": "lbfgs",
-  "tfidf_features": 39412,
-  "tfidf_ngram": [
-    1,
-    2
+  "sentiment_model": {
+    "type": "LogisticRegression",
+    "C": 5.0,
+    "accuracy": 0.8889,
+    "f1": 0.8897
+  },
+  "topic_model": {
+    "type": "LDA",
+    "n_topics": 5,
+    "topic_names": [
+      "Login & Akses Aplikasi",
+      "Transfer & Transaksi",
+      "Customer Service",
+      "Fitur Mobile Banking",
+      "Produk & Bunga"
+    ]
+  },
+  "prediction_model": {
+    "type": "RandomForestClassifier",
+    "accuracy": 0.9773,
+    "f1": 0.966
+  },
+  "feature_cols": [
+    "neg_ratio",
+    "pos_ratio",
+    "sentiment_score",
+    "neg_delta",
+    "pos_delta",
+    "score_delta",
+    "neg_momentum"
   ],
   "label_classes": [
     "negative",
     "neutral",
     "positive"
   ],
-  "val_accuracy": 0.8952,
-  "val_f1_weighted": 0.8956,
   "train_size": 11000,
   "valid_size": 1260
 }
