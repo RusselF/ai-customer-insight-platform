@@ -20,13 +20,13 @@ export class MlService {
     return url;
   }
 
-  async analyzeSentiment(text: string) {
-    const endpoint = `${this.getMlApiUrl()}/predict/sentiment`;
+  async analyzeKeyword(keyword: string) {
+    const endpoint = `${this.getMlApiUrl()}/analyze/keyword`;
     try {
       const response = await firstValueFrom(
-        this.httpService.post(endpoint, { text }).pipe(
+        this.httpService.post(endpoint, { keyword }).pipe(
           catchError((error) => {
-            this.logger.error('Error calling ML Service (sentiment):', error?.response?.data || error.message);
+            this.logger.error('Error calling ML Service (keyword):', error?.response?.data || error.message);
             throw new InternalServerErrorException('Failed to communicate with ML Service');
           }),
         ),
@@ -37,14 +37,15 @@ export class MlService {
     }
   }
 
-  async analyzeAll(text: string) {
-    const endpoint = `${this.getMlApiUrl()}/analyze-all`;
+  // Legacy method kept for compatibility
+  async analyzeSentiment(text: string) {
+    const endpoint = `${this.getMlApiUrl()}/predict/sentiment`;
     try {
       const response = await firstValueFrom(
         this.httpService.post(endpoint, { text }).pipe(
-          catchError((error) => {
-            this.logger.error('Error calling ML Service (analyze-all):', error?.response?.data || error.message);
-            throw new InternalServerErrorException('Failed to communicate with ML Service');
+          catchError(() => {
+             // If sentiment endpoint is removed, redirect to a simple keyword mock logic or error
+             throw new InternalServerErrorException('Please use keyword analysis endpoint');
           }),
         ),
       );
